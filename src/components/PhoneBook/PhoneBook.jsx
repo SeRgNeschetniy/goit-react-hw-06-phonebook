@@ -3,11 +3,8 @@ import PhoneBookList from './ContactList/ContactList';
 import Filter from './Filter/Filter';
 import { Container } from './PhoneBook.module';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  addContact,
-  getFilteredContacts,
-  removeContact,
-} from 'redux/itemsSlice';
+import { addContact } from 'redux/itemsSlice';
+import { getFilteredContacts } from 'redux/itemsSelector';
 import { getFilter, setFilter } from 'redux/filterSlice';
 
 export default function PhoneBook() {
@@ -28,11 +25,6 @@ export default function PhoneBook() {
     dispatch(setFilter(value));
   };
 
-  const onRemoveContact = id => {
-    const action = removeContact(id);
-    dispatch(action);
-  };
-
   const isDuplicate = ({ name, number }) => {
     const result = contacts.find(
       item => item.name === name && item.number === number
@@ -49,7 +41,7 @@ export default function PhoneBook() {
       <div className="block">
         <h2>Contacts</h2>
         <Filter filter={filter} handleChange={handleChange} />
-        <PhoneBookList items={contacts} removeContact={onRemoveContact} />
+        <PhoneBookList items={contacts} />
       </div>
     </Container>
   );

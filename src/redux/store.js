@@ -17,6 +17,7 @@ import contactReducer from 'redux/reducer';
 const booksPersistConfig = {
   key: 'root',
   storage,
+  blacklist: ['filter'],
 };
 
 const persistedBooksReducer = persistReducer(
